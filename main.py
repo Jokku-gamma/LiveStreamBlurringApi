@@ -1,6 +1,7 @@
 import gradio as gr
 import cv2
 import numpy as np
+
 face_net=cv2.dnn.readNetFromCaffe(
     'deploy.prototxt',
     'res10_300x300_ssd_iter_140000.caffemodel'
@@ -63,6 +64,7 @@ iface=gr.Interface(
     description="This application can blur faces and license plates detected on the webcam. Say Cheese....",
     css="footer {display:none !important;}",
 )
-
+import os
+port=int(os.environ.get("PORT",7860))
 if __name__=="__main__":
-    iface.launch()
+    iface.launch(server_name="0.0.0.0",server_port=port)
